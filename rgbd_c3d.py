@@ -155,6 +155,6 @@ class RGBDC3D(nn.Module):
         ys2 = nn.parallel.data_parallel(self.classifier_conv3d2, feats, self.gpu_id)
         ys = ys1 + ys2
 
-        ys = ys.mean(2, keepdim=True).mean(3, keepdim=True).mean(4, keepdim=True).view(-1, self.n_class)
+        ys = ys.mean(2).mean(3).mean(4).view(-1, self.n_class)
         output = (ys, )
         return output
