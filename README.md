@@ -14,6 +14,8 @@ sudo pip install torchvision
 3. Uncompress the model `tar xf model_data.tar.gz`
 
 ## Evaluation
+Prediction results used for submission can be found in [pred](logs/test/pred).
+ 
 1. To evaluate on validation split(phase1) with RGB modality:
 ```
 python main_train_rgbd_c3d.py --resume ./model/focus_rgb_init_depth.model \
@@ -47,3 +49,10 @@ python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_test_score.txt \
  --score2 logs/test/score/focus_depth_test_score.txt --eval_split test
 ```
 The prediction file in the required [format](https://competitions.codalab.org/competitions/16491#learn_the_details) will be located in `./logs/test/pred`.
+
+## Performance
+* Training time on 4 x Titan X(Maxwell) with batch size 32:  1.868s
+* Testing time on 4 x Titan X(Maxwell) with batch size 32: 1.093s
+* Accuracy on validation with RGBD late fusion(0.5RGB+0.5D): 0.6184
+* Accuracy on test with RGBD late fusion(0.5RGB+0.5D): [TBD]
+
