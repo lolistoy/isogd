@@ -49,7 +49,26 @@ python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_test_score.txt \
  --score2 logs/test/score/focus_depth_test_score.txt --eval_split test
 ```
 The prediction file in the required [format](https://competitions.codalab.org/competitions/16491#learn_the_details) will be located in `./logs/test/pred`.
+## Training
+A two-phase training procedure is adopted for RGB and Depth model, each phase will take 5-6 hours time on 4xTitan X(Maxwell) for each modality:
+1. Train RGB model initialized from C3D:
+```
+python main_train_rgbd_c3d.py --gpu_id 0,1,2,3 --modality focus_rgb
+```
+2. Train Depth model initialized from C3D:
+```
+python main_train_rgbd_c3d.py --gpu_id 0,1,2,3 --modality focus_depth
+```
+3. Finetune RGB model initialized with depth C3D:
+```
+python main_train_rgbd_c3d.py --gpu_id 0,1,2,3 --modality focus_rgb --resume ./model/focus_depth.model
+```
 
+4. Finetune depth model initialized with RGB C3D:
+```
+python main_train_rgbd_c3d.py --gpu_id 0,1,2,3 --modality focus_depth --resume ./model/focus_rgb.model
+```
+ 
 ## Performance
 * Training time on 4 x Titan X(Maxwell) with batch size 32:  1.868s
 * Testing time on 4 x Titan X(Maxwell) with batch size 32: 1.093s

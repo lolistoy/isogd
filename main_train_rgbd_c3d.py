@@ -38,7 +38,7 @@ if args.max_step == -1:
 if args.lr_decay_step == -1:
     args.lr_decay_step = 8000
 
-args.save_every_step = args.max_step/50
+args.save_every_step = args.max_step/25
 
 args.gpu_id = args.gpu_id.split(',')
 args.gpu_id = [int(r) for r in args.gpu_id]
@@ -207,7 +207,16 @@ def train():
         if (step % args.save_every_step == 0 or step >= args.max_step-1) and step != 0:
             prec1 = validate()
             # remember best prec@1 and save checkpoint
-            torch.save({'model_state_dict': model.state_dict()}, './model/{}.model'.format(args.modality))
+            if args.resume == '':
+                model_name = '{}.model'.format(args.modality)
+            elif args.modality == 'focus_rgb':
+                model_name = 'focus_rgb_init_depth.model'
+            elif args.modality == 'focus_depth':
+                model_name = 'focus_depth_init_rgb.model'
+            else:
+                raise RuntimeError('modality wrong!')
+
+            torch.save({'model_state_dict': model.state_dict()}, './model/{}'.format(model_name))
             if step >= args.max_step:
                 break
 
