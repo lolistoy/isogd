@@ -128,5 +128,5 @@ model/focus_depth_init_rgb.model
 ## Performance
 * Training time on 4 x Titan X(Maxwell) with batch size 32:  1.868s
 * Testing time on 4 x Titan X(Maxwell) with batch size 32: 1.093s
-* Accuracy on validation with RGBD late fusion(0.5RGB+0.5D): 0.6184
+* Accuracy on validation with RGBD late fusion(0.5RGB+0.5D): 0.6215
 * Accuracy on test with RGBD late fusion(0.5RGB+0.5D): [TBD]
