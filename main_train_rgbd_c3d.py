@@ -275,12 +275,19 @@ def validate(is_test=False):
           .format(top1=top1_meter, top5=top5_meter))
 
     ys_all = np.concatenate(ys_all, 0)
-    if is_test:
-        save_score(os.path.join('logs', 'test/score', '{}_{}_score.txt'.format(args.modality,
-                                                                         args.eval_split)), vid_paths_all, ys_all)
+    if args.resume == '':
+        score_name = '{}_{}_score.txt'.format(args.modality, args.eval_split)
+    elif args.modality == 'focus_rgb':
+        score_name = 'focus_rgb_init_depth_{}_score.txt'.format(args.eval_split)
+    elif args.modality == 'focus_depth':
+        score_name = 'focus_depth_init_rgb_{}_score.txt'.format(args.eval_split)
     else:
-        save_score(os.path.join('logs', 'train/score', '{}_{}_score.txt'.format(args.modality,
-                                                                          args.eval_split)), vid_paths_all, ys_all)
+        raise RuntimeError('modality wrong!')
+
+    if is_test:
+        save_score(os.path.join('logs', 'test/score', score_name), vid_paths_all, ys_all)
+    else:
+        save_score(os.path.join('logs', 'train/score', score_name), vid_paths_all, ys_all)
     model.train()
     return top1_meter.avg
 

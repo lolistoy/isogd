@@ -26,9 +26,9 @@ dataset/IsoGD_phase_2/test/001/M_00001.avi
 ```
 
 2. Download and decompress pre-trained model `model_data.tar.gz` from 
-[rgbd model and preprocessed pose data](https://www.dropbox.com/s/zn1guimo7puznb4/model_data.tar.gz?dl=1).
+[rgbd model and preprocessed pose data](https://www.dropbox.com/s/00nfuhx238wbb7w/model_data.tar.gz?dl=1).
 ```
-wget https://www.dropbox.com/s/zn1guimo7puznb4/model_data.tar.gz?dl=1 -O model_data.tar.gz
+wget https://www.dropbox.com/s/00nfuhx238wbb7w/model_data.tar.gz?dl=1 -O model_data.tar.gz
 tar xf model_data.tar.gz
 ```
 After decompression, you will find model and data in two new folders: [model](model) and [pose_h5](pose_h5) in the root folder of the code.
@@ -63,7 +63,7 @@ python main_train_rgbd_c3d.py --resume ./model/focus_rgb_init_depth.model \
 ```
 2. To evaluate on validation split (phase1) with depth modality:
 ```
-python main_train_rgbd_c3d.py --resume ./model/focus_rgb_init_depth.model \
+python main_train_rgbd_c3d.py --resume ./model/focus_depth_init_rgb.model \
 --gpu_id 0,1,2,3 --evaluate 1 --eval_split val --modality focus_depth 
 ```
 3. To evaluate on test split (phase2) with RGB modality:
@@ -73,11 +73,11 @@ python main_train_rgbd_c3d.py --resume ./model/focus_rgb_init_depth.model \
 ```
 4. To evaluate on test split (phase2) with depth modality:
 ```
-python main_train_rgbd_c3d.py --resume ./model/focus_rgb_init_depth.model \
+python main_train_rgbd_c3d.py --resume ./model/focus_depth_init_rgb.model \
 --gpu_id 0,1,2,3 --evaluate 1 --eval_split test --modality focus_depth 
 ```
 
-After this, [logs/test/score](logs/test/score) folder will be poplulated with original prediction score for each valid/test sample.
+After this, [logs/test/score](logs/test/score) folder will be populated with original prediction score for each valid/test sample.
 
 These score will be used for late fusion and generate the final prediction submission file in the [next section](#Late fusion of RGBD).
 
@@ -86,13 +86,13 @@ Prediction scores from RGB and depth modality are fused with weight 0.5.
 
 1. For validation split (phase1):
 ```
-python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_val_score.txt \
- --score2 logs/test/score/focus_depth_val_score.txt --eval_split val
+python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_init_depth_val_score.txt \
+ --score2 logs/test/score/focus_depth_init_rgb_val_score.txt --eval_split val
 ```
 2. For test split (phase2):
 ```
-python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_test_score.txt \
- --score2 logs/test/score/focus_depth_test_score.txt --eval_split test
+python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_init_depth_test_score.txt \
+ --score2 logs/test/score/focus_depth_init_rgb_test_score.txt --eval_split test
 ```
 The prediction file in the required [format](https://competitions.codalab.org/competitions/16491#learn_the_details) will be located in `./logs/test/pred`.
 
