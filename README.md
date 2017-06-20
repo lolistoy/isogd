@@ -25,11 +25,31 @@ dataset/IsoGD_phase_2/test/001/K_00001.avi
 dataset/IsoGD_phase_2/test/001/M_00001.avi
 ```
 
-2. Download pre-trained model `model_data.tar.gz` from 
-[rgbd model and preprocessed pose data](https://www.dropbox.com/s/zn1guimo7puznb4/model_data.tar.gz?dl=0).
-3. Uncompress the model: `tar xf model_data.tar.gz`
+2. Download and decompress pre-trained model `model_data.tar.gz` from 
+[rgbd model and preprocessed pose data](https://www.dropbox.com/s/zn1guimo7puznb4/model_data.tar.gz?dl=1).
+```
+wget https://www.dropbox.com/s/zn1guimo7puznb4/model_data.tar.gz?dl=1 -O model_data.tar.gz
+tar xf model_data.tar.gz
+```
+After decompression, you will find model and data in two new folders: [model](model) and [pose_h5](pose_h5) in the root folder of the code.
 
-After decompression, you will find two new folders: [model](model) and [pose_h5](pose_h5). 
+After all these steps, the code directory should have:
+```
+dataset/IsoGD_phase_1/train
+dataset/IsoGD_phase_1/valid
+dataset/IsoGD_phase_1/info
+logs/test
+model/*.model
+pose_h5/phase1/*
+pose_h5/phase2/*
+isogd.py
+main_rgbd_fusion.py
+main_train_rgbd_c3d.py
+rgbd_c3d.py
+utils.py
+README.md
+```
+And you are ready to do training or testing.
 
 ## Testing
 We run our model by ourselves and prediction results used for submission can be found in [pred](logs/test/pred).
