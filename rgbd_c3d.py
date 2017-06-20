@@ -154,7 +154,9 @@ class RGBDC3D(nn.Module):
         ys1 = nn.parallel.data_parallel(self.classifier_conv3d1, feats, self.gpu_id)
         ys2 = nn.parallel.data_parallel(self.classifier_conv3d2, feats, self.gpu_id)
         ys = ys1 + ys2
-
-        ys = ys.mean(2).mean(3).mean(4).view(-1, self.n_class)
+        if torch.__version__ == '0.1.12_2':
+            ys = ys.mean(2).mean(3).mean(4).view(-1, self.n_class)
+        else:
+            ys = ys.mean(2, True).mean(3, True).mean(4, True).view(-1, self.n_class)
         output = (ys, )
         return output
