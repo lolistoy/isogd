@@ -97,7 +97,7 @@ python main_rgbd_fusion.py --score1 logs/test/score/focus_rgb_test_score.txt \
 The prediction file in the required [format](https://competitions.codalab.org/competitions/16491#learn_the_details) will be located in `./logs/test/pred`.
 
 ## Training
-A two-phase training procedure is adopted for RGB and Depth model, each phase will take 5-6 hours time on 4xTitan X(Maxwell) for each modality.
+A two-phase training procedure is adopted for RGB and Depth model, each phase will take 6-8 hours time on 4xTitan X(Maxwell) for each modality.
 
 To train the model, follow these steps bellow:
 
