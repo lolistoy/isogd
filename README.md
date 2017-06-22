@@ -31,6 +31,10 @@ dataset/IsoGD_phase_2/test/001/M_00001.avi
 wget https://www.dropbox.com/s/plzuw7coomwtkas/model_data.tar.gz?dl=1 -O model_data.tar.gz
 tar xf model_data.tar.gz
 ```
+The model can also be downloaded from: (https://pan.baidu.com/s/1o8JRVHS)[https://pan.baidu.com/s/1o8JRVHS].
+
+The md5sum for the file is: 39cd8d469bfea471a8e01168aa5889c7
+
 After decompression, you will find model and data in two new folders: [model](model) and [pose_h5](pose_h5) in the root folder of the code.
 
 After all these steps, the code directory should have:
