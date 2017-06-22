@@ -26,9 +26,9 @@ dataset/IsoGD_phase_2/test/001/M_00001.avi
 ```
 
 2. Download and decompress pre-trained model `model_data.tar.gz` from 
-[rgbd model and preprocessed pose data](https://www.dropbox.com/s/00nfuhx238wbb7w/model_data.tar.gz?dl=1).
+[rgbd model and preprocessed pose data](https://www.dropbox.com/s/plzuw7coomwtkas/model_data.tar.gz?dl=0).
 ```
-wget https://www.dropbox.com/s/00nfuhx238wbb7w/model_data.tar.gz?dl=1 -O model_data.tar.gz
+wget https://www.dropbox.com/s/plzuw7coomwtkas/model_data.tar.gz?dl=1 -O model_data.tar.gz
 tar xf model_data.tar.gz
 ```
 After decompression, you will find model and data in two new folders: [model](model) and [pose_h5](pose_h5) in the root folder of the code.
